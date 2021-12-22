@@ -11,7 +11,7 @@ files:
       offset: 371
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Solved
     encrypted_possible_answer: |-
       self.value = value
               self.next = next_
@@ -23,7 +23,7 @@ files:
       offset: 506
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Solved
     encrypted_possible_answer: return self.value
   - offset: 590
     length: 91
@@ -33,7 +33,7 @@ files:
       offset: 545
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Solved
     encrypted_possible_answer: |-
       def get_next(self) -> Optional["Node"]:
               """Метод, который возвращает значение атрибута next"""
@@ -46,7 +46,7 @@ files:
       offset: 691
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Solved
     encrypted_possible_answer: print(first_node.get_value())
   - offset: 885
     length: 89
@@ -57,7 +57,7 @@ files:
       offset: 753
     initialized_from_dependency: false
     selected: true
-    status: Unchecked
+    status: Solved
     encrypted_possible_answer: print(second_node.get_next())
   text: |
     from typing import Any, Optional
@@ -97,5 +97,8 @@ files:
     1
     None
   learner_created: false
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 22 Dec 2021 16:49:39 UTC
 record: -1
