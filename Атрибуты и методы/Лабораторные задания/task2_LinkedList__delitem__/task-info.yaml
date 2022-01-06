@@ -3,14 +3,14 @@ files:
 - name: main.py
   visible: true
   placeholders:
-  - offset: 2061
-    length: 80
+  - offset: 1992
+    length: 28
     placeholder_text: '...  # TODO проверка индекса'
     initial_state:
       length: 28
       offset: 1992
     initialized_from_dependency: false
-    selected: true
+    selected: false
     status: Solved
     encrypted_possible_answer: |-
       if not isinstance(index, int):
@@ -18,14 +18,14 @@ files:
 
               if not 0 <= index < self.len:  # для for
                   raise IndexError()
-  - offset: 2151
-    length: 446
+  - offset: 2030
+    length: 29
     placeholder_text: '...  # TODO алгоритм удаления'
     initial_state:
       length: 29
       offset: 2030
     initialized_from_dependency: false
-    selected: true
+    selected: false
     status: Solved
     encrypted_possible_answer: |-
       if index == 0:
@@ -186,5 +186,5 @@ files:
 status: Solved
 feedback:
   message: Congratulations!
-  time: Wed, 29 Dec 2021 18:16:29 UTC
+  time: Thu, 06 Jan 2022 13:49:53 UTC
 record: -1

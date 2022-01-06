@@ -4,7 +4,7 @@ files:
   visible: true
   placeholders:
   - offset: 0
-    length: 794
+    length: 793
     placeholder_text: '# TODO class Date'
     initial_state:
       length: 17

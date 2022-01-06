@@ -21,5 +21,5 @@ class Date:
 
 
 if __name__ == "__main__":
-    date1 = Date(10, 2, 1999)
+    date1 = Date(3, 2, 1999)
     print(date1)
