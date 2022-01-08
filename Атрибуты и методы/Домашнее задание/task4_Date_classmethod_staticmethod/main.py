@@ -29,22 +29,26 @@ class Date:
             result = 0
         return result
 
-    def get_max_day(self, month: int, year: int):
+    @classmethod
+    def get_max_day(cls, month: int, year: int):
         """Возвращает максимальное количество дней в месяце для указанного года"""
-        max_days = self.DAY_OF_MONTH[self.is_leap_year(year)][month - 1]
+        max_days = cls.DAY_OF_MONTH[cls.is_leap_year(year)][month - 1]
         return max_days
 
-    def is_valid_date(self, day: int, month: int, year: int):
+    @classmethod
+    def is_valid_date(cls, day: int, month: int, year: int):
         """Проверяет, является ли дата корректной"""
+        if not isinstance(day, int) or not isinstance(month, int) or not isinstance(year, int):
+            raise TypeError
         if day <= 0 or month <= 0 or year <= 0:
             raise ValueError("Не может быть нулем и отрицат")
         elif month > 12:
             raise ValueError("Месяцев в году 12")
 
-        elif day > self.get_max_day(month, year):
+        elif day > cls.get_max_day(month, year):
             raise ValueError("В этом месяце нет столько дней по календярю")
 
 
 if __name__ == "__main__":
     # Write your solution here
-    date1 = Date("j",13, 1981)
+    date1 = Date(29, 2, 2000)

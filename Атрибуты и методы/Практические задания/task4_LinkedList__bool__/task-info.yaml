@@ -128,8 +128,5 @@ files:
             self.is_valid(next_)
             self.next = next_
   learner_created: false
-status: Solved
-feedback:
-  message: Congratulations!
-  time: Wed, 29 Dec 2021 16:59:39 UTC
+status: Unchecked
 record: -1
