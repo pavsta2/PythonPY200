@@ -46,7 +46,7 @@ class LinkedList:
         if not isinstance(index, int):
             raise TypeError()
 
-        if not 0 <= index < self.len:  # для forcurrent_node = self.head
+        if not 0 <= index < self.len:  # для for current_node = self.head
             raise IndexError()
 
         current_node = self.head
@@ -114,28 +114,51 @@ class LinkedList:
             self.len += 1
 
     def index(self, value: int, start: Optional[int] = None, stop: Optional[int] = None):
+        """Метод возвращает индекс указанного значения.
+        Можно задавать диапазон поиска в виде начального и конечного индексов"""
         if not isinstance(value, int) or not isinstance(start, (int, type(None))) \
                 or not isinstance(stop, (int, type(None))):
             raise TypeError
-        if start is not None and 0 > start > (self.len - 1) \
-                or stop is not None and 0 > stop > (self.len - 1):
-            raise ValueError
+        if start is not (None and 0 < start < (self.len - 1)) \
+                or stop is not (None and 0 < stop < (self.len - 1)):
+            raise ValueError("значение индекса выходит за диапазон списка")
 
         current_node = self.head
         index = 0
 
-        while current_node.value != value:
-            current_node = current_node.next
-            index += 1
+        if start is None and stop is None:
+            while current_node.value != value:
+                current_node = current_node.next
+                index += 1
+                if current_node is None:
+                    raise ValueError("значение не найдено")
+        elif start is not None and stop is None:
+            current_node = self.step_by_step_on_nodes(start)
+            index = start
+            while current_node.value != value:
+                current_node = current_node.next
+                index += 1
+                if current_node is None:
+                    raise ValueError("значение не найдено")
+        elif start is not None and stop is not None:
+            current_node = self.step_by_step_on_nodes(start)
+            index = start
+            while current_node.value != value:
+                current_node = current_node.next
+                index += 1
+                if current_node is None:
+                    raise ValueError("значение не найдено")
+                if current_node == self.step_by_step_on_nodes(stop):
+                    if current_node != value:
+                        raise ValueError("значение не найдено")
+                    break
 
         return index
 
 
 if __name__ == "__main__":
-    list_ = [1, 2, 3]
+    list_ = [1, 2, 3, 1, 2, 4, 1, 2, 3]
     linked_list = LinkedList(list_)
     print(linked_list)
 
-    print(linked_list.index(9))
-
-
+    print(linked_list.index(2, 3, 10))
