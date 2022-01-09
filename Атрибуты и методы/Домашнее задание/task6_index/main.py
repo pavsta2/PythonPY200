@@ -116,16 +116,21 @@ class LinkedList:
     def index(self, value: int, start: Optional[int] = None, stop: Optional[int] = None):
         """Метод возвращает индекс указанного значения.
         Можно задавать диапазон поиска в виде начального и конечного индексов"""
-        if not isinstance(value, int) or not isinstance(start, (int, type(None))) \
+        if not isinstance(value, int) or not isinstance(start, int) \
                 or not isinstance(stop, (int, type(None))):
             raise TypeError
-        if start is not (None and 0 < start < (self.len - 1)) \
-                or stop is not (None and 0 < stop < (self.len - 1)):
+
+        if start is not None and not 0 <= start < (self.len - 1):
             raise ValueError("значение индекса выходит за диапазон списка")
+
+        if stop is not None and not 0 <= stop < (self.len - 1):
+            raise ValueError("значение индекса выходит за диапазон списка")
+
+        if stop is not None and start is not None and stop <= start:
+            raise ValueError("начало диапазона поиска не должно ровнятся или превышать его конец")
 
         current_node = self.head
         index = 0
-
         if start is None and stop is None:
             while current_node.value != value:
                 current_node = current_node.next
@@ -152,7 +157,6 @@ class LinkedList:
                     if current_node != value:
                         raise ValueError("значение не найдено")
                     break
-
         return index
 
 
@@ -161,4 +165,4 @@ if __name__ == "__main__":
     linked_list = LinkedList(list_)
     print(linked_list)
 
-    print(linked_list.index(2, 3, 10))
+    print(linked_list.index(1, 10))
