@@ -65,5 +65,5 @@ if __name__ == "__main__":
     ll = LinkedList(list_)
     print(ll)
 
-    ll.append(100)
+    ll.append("d")
     print(ll)

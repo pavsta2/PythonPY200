@@ -113,11 +113,10 @@ class LinkedList:
             self.step_by_step_on_nodes(index - 1).next = inserted_node
             self.len += 1
 
-    def index(self, value: int, start: Optional[int] = None, stop: Optional[int] = None):
+    def index(self, value: Any, start: Optional[int] = None, stop: Optional[int] = None) -> int:
         """Метод возвращает индекс указанного значения.
         Можно задавать диапазон поиска в виде начального и конечного индексов"""
-        if not isinstance(value, int) or not isinstance(start, int) \
-                or not isinstance(stop, (int, type(None))):
+        if not isinstance(start, int) or not isinstance(stop, (int, type(None))):
             raise TypeError
 
         if start is not None and not 0 <= start < (self.len - 1):
@@ -159,10 +158,19 @@ class LinkedList:
                     break
         return index
 
+    def count(self, value: Any) -> int:
+        count = 0
+
+        for val in range(self.len):
+            current_node = self.step_by_step_on_nodes(val).value
+            if current_node == value:
+                count += 1
+        return count
+
 
 if __name__ == "__main__":
-    list_ = [1, 2, 3, 1, 2, 4, 0,1, 2, 3]
+    list_ = [1, 2, 3, 1, 2, 4, 1, 2, 3, "e"]
     linked_list = LinkedList(list_)
     print(linked_list)
 
-    print(linked_list.index(1, 6, 8))
+    print(linked_list.count("e"))
