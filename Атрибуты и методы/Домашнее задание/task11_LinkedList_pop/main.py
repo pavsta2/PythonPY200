@@ -177,7 +177,7 @@ class LinkedList:
     def pop(self, index: Optional[int] = None) -> None:
         if not isinstance(index, (int, type(None))):
             raise TypeError
-        if not 0 < index <= (self.len - 1):
+        if not 0 <= index <= (self.len - 1):
             raise IndexError
 
         if index is None:
@@ -189,12 +189,10 @@ class LinkedList:
             self.__delitem__(index)
 
 
-
 if __name__ == "__main__":
     list_ = [1, 2, 3, 1, 2, 4, 1, 2, 3, "e"]
     linked_list = LinkedList(list_)
     print(linked_list)
 
-    linked_list.pop(10)
+    linked_list.pop(0)
     print(linked_list)
-
