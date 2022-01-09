@@ -172,7 +172,6 @@ class LinkedList:
                 self.append(value)
 
 
-
 if __name__ == "__main__":
     list_ = [1, 2, 3, 1, 2, 4, 1, 2, 3, "e"]
     linked_list = LinkedList(list_)
