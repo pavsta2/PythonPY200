@@ -160,7 +160,6 @@ class LinkedList:
 
     def count(self, value: Any) -> int:
         count = 0
-
         for val in range(self.len):
             current_node = self.step_by_step_on_nodes(val).value
             if current_node == value:
