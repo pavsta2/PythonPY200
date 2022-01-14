@@ -8,9 +8,10 @@ class Figure:
 
 class Rectangle(Figure):
     def __init__(self, a, b, name=None):
-        # TODO вызвать конструктор базового класса
+        super().__init__(name)   #вызвать конструктор базового класса
         self.a = a
         self.b = b
+
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ files:
       offset: 0
     initialized_from_dependency: false
     selected: true
-    status: Solved
+    status: Unchecked
     encrypted_possible_answer: |
       # TODO
   text: '# TODO class Date'
@@ -33,8 +33,5 @@ files:
 - name: tests/__init__.py
   visible: false
   learner_created: false
-status: Solved
-feedback:
-  message: Congratulations!
-  time: Tue, 28 Dec 2021 18:54:33 UTC
+status: Unchecked
 record: -1

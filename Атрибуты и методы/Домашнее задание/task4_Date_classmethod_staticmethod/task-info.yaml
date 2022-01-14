@@ -3,28 +3,28 @@ files:
 - name: main.py
   visible: true
   placeholders:
-  - offset: 567
-    length: 283
+  - offset: 555
+    length: 11
     placeholder_text: '...  # TODO'
     initial_state:
       length: 11
       offset: 555
     initialized_from_dependency: false
-    selected: true
+    selected: false
     status: Solved
     encrypted_possible_answer: '...'
-  - offset: 999
-    length: 95
+  - offset: 709
+    length: 11
     placeholder_text: '...  # TODO'
     initial_state:
       length: 11
       offset: 709
     initialized_from_dependency: false
-    selected: true
+    selected: false
     status: Solved
     encrypted_possible_answer: '...'
-  - offset: 1545
-    length: 117
+  - offset: 845
+    length: 11
     placeholder_text: '...  # TODO'
     initial_state:
       length: 11
@@ -71,7 +71,5 @@ files:
   visible: false
   learner_created: false
 status: Solved
-feedback:
-  time: Thu, 06 Jan 2022 19:13:39 UTC
 record: -1
 post_submission_on_open: true

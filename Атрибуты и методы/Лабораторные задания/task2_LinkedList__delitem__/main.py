@@ -74,7 +74,7 @@ class LinkedList:
         # алгоритм удаления
 
         if index == 0:
-            self.head = self.head.next
+            self.head = self.head.__next
         elif 0 < index < (self.len - 1):
             node_new_left = self.step_by_step_on_nodes(index - 1)
             node_new_right = self.step_by_step_on_nodes(index + 1)
