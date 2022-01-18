@@ -6,9 +6,9 @@ from node import Node
 class LinkedList:
     def __init__(self, data: Iterable = None):
         """Конструктор связного списка"""
-        self.len = 0
-        self.head: Optional[Node] = None
-        self.tail = self.head
+        self._len = 0
+        self._head: Optional[Node] = None
+        self._tail = self.head
 
         if data is not None:
             for value in data:
@@ -19,12 +19,12 @@ class LinkedList:
         append_node = Node(value)
 
         if self.head is None:
-            self.head = self.tail = append_node
+            self._head = self._tail = append_node
         else:
             self.linked_nodes(self.tail, append_node)
-            self.tail = append_node
+            self._tail = append_node
 
-        self.len += 1
+        self._len += 1
 
     def step_by_step_on_nodes(self, index: int) -> Node:
         """ Функция выполняет перемещение по узлам до указанного индекса. И возвращает узел. """
@@ -69,5 +69,42 @@ class LinkedList:
     def __str__(self) -> str:
         return f"{self.to_list()}"
 
+    @property
+    def len(self):
+        return self._len
 
-# TODO Реализовать класс DoubleLinkedList
+    @property
+    def head(self):
+        return self._head
+
+    @property
+    def tail(self):
+        return self._tail
+
+
+class DoubleLinkedList(LinkedList):
+
+    @staticmethod
+    def linked_nodes(left_node: Node, right_node: Optional[Node] = None) -> None:
+        """
+        Функция, которая связывает между собой два узла.
+
+        :param left_node: Левый или предыдущий узел
+        :param right_node: Правый или следующий узел
+        """
+        left_node.next = right_node
+        right_node.prev = left_node
+
+    # @property
+    # def prev(self):
+    #     return self._prev
+    #
+    # @prev.setter
+    # def prev(self, prev: Optional["DoubleLinkedNode"]):
+    #     self.is_valid(prev)
+    #     self._prev = prev
+
+
+if __name__ == "__main__":
+    a = DoubleLinkedList([1, 2, 3])
+    print(a)

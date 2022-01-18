@@ -13,6 +13,8 @@ files:
 - name: node.py
   visible: true
   learner_created: true
-status: Unchecked
+status: Solved
+feedback:
+  time: Sun, 09 Jan 2022 16:04:02 UTC
 record: -1
 post_submission_on_open: true

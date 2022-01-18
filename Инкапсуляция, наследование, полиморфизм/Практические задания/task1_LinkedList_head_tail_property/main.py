@@ -3,7 +3,7 @@ from typing import Any, Iterable, Optional
 from node import Node
 
 
-# TODO защитить от модификации атрибуты head, tail, len
+# защитить от модификации атрибуты head, tail, len
 class LinkedList:
     def __init__(self, data: Iterable = None):
         """Конструктор связного списка"""

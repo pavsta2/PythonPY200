@@ -56,6 +56,7 @@ class DoubleLinkedNode(Node):
         self.is_valid(prev)
         self._prev = prev
 
+
 # сделать геттер и сеттер для прева
 # репр, is_valid заново
 # str  наследуем

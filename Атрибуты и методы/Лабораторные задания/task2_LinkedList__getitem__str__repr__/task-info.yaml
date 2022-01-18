@@ -10,7 +10,7 @@ files:
       length: 36
       offset: 1391
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Solved
     encrypted_possible_answer: IndexError()
   - offset: 1692
