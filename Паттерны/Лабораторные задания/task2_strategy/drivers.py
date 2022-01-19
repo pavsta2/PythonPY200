@@ -41,7 +41,24 @@ class SimpleFileDriver(IStructureDriver):
         return f"{self.__class__.__name__}(\"{self.filename}\")"
 
 
-# TODO
+class JsonFileDriver(IStructureDriver):
+    def __init__(self, filename):
+        self.filename = filename
+
+    def read(self) -> Iterable:
+        with open(self.filename) as f:
+            input_ = json.load(f)
+        if not isinstance(input_, list):
+            raise TypeError
+        return input_
+
+    def write(self, data: Iterable) -> None:
+        data = [value for value in data]
+        with open(self.filename, "w") as f:
+            json.dump(data, f, indent=4)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(\"{self.filename}\")"
 
 
 if __name__ == '__main__':
