@@ -4,14 +4,14 @@ files:
   visible: true
   placeholders:
   - offset: 1172
-    length: 39
+    length: 602
     placeholder_text: '# TODO Реализовать класс JsonFileDriver'
     initial_state:
       length: 39
       offset: 1172
     initialized_from_dependency: false
-    selected: false
-    status: Unchecked
+    selected: true
+    status: Solved
     encrypted_possible_answer: |-
       class JsonFileDriver(IStructureDriver):
           def __init__(self, json_filename):
@@ -86,6 +86,14 @@ files:
 - name: __init__.py
   visible: false
   learner_created: false
-status: Unchecked
+- name: output.txt
+  visible: true
+  learner_created: true
+- name: output.json
+  visible: true
+  learner_created: true
+status: Solved
+feedback:
+  time: Wed, 19 Jan 2022 17:31:48 UTC
 record: -1
 post_submission_on_open: true
