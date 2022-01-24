@@ -16,7 +16,7 @@ files:
     selected: false
     status: Unchecked
     encrypted_possible_answer: 'self.next = next_  # вызовется setter'
-  - offset: 821
+  - offset: 852
     length: 153
     placeholder_text: |-
       # TODO заменить на getter и setter

@@ -17,6 +17,7 @@ class Node:
 
     @property
     def next(self):
+        print("Вызван getter")
         return self._next
 
     def __repr__(self) -> str:
@@ -45,3 +46,4 @@ if __name__ == "__main__":
     first_node.next = second_node
 
     print(repr(first_node), repr(first_node.next))
+    print(first_node.next)
