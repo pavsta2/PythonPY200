@@ -76,4 +76,4 @@ if __name__ == "__main__":
     for _ in a:
         print(_)
 
-    print(type(Node1.next))
+    print(a)

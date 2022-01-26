@@ -89,5 +89,13 @@ if __name__ == '__main__':
     list_ = [1, 2, 3]
     linked_list = LinkedList(list_)
 
+    b = iter(linked_list)
+
+    print(next(b))
+    print(next(b))
+    print(next(b))
+    print(next(b))
+    print(next(b))
+
     for value in linked_list:
         print(value)

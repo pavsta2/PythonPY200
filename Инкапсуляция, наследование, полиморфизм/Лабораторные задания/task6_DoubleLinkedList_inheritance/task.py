@@ -107,4 +107,4 @@ class DoubleLinkedList(LinkedList):
 
 if __name__ == "__main__":
     a = DoubleLinkedList([1, 2, 3])
-    print(a)
+    print(len(a))
