@@ -71,8 +71,23 @@ class LinkedList(MutableSequence, ABC):
         set_node = self.step_by_step_on_nodes(index)
         set_node.value = value
 
-    def insert(self, index: int, value) -> None:
-        ...
+    def insert(self, index: int, value: Any) -> None:
+        if not isinstance(index, int):
+            raise TypeError()
+        if not 0 <= index:
+            raise IndexError()
+
+        inserted_node = Node(value)
+        if index > (self.len - 1) or self.head is None:
+            self.append(value)
+        elif index == 0:
+            self.link_nodes(inserted_node, self.step_by_step_on_nodes(0))
+            self.head = inserted_node
+            self.len += 1
+        else:
+            inserted_node.next = self.step_by_step_on_nodes(index)
+            self.step_by_step_on_nodes(index - 1).next = inserted_node
+            self.len += 1
 
     def __str__(self):
         return f"{[linked_list_value for linked_list_value in self]}"
@@ -82,5 +97,5 @@ if __name__ == "__main__":
     a = [1, 2, 3, 4, 5, 6, 7]
     b = LinkedList(a)
 
-    b[1] = 100
+    b.insert(7,100)
     print(b)
