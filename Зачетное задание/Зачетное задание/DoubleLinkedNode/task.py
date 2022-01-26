@@ -14,7 +14,7 @@ class Node:
         self._next = next_
 
     def __repr__(self) -> str:
-        return f"Node({self.value}, {None})" if self._next is None else f"Node({self.value}, Node({self._next}))"
+        return f"Node({self.value}, {None})" if self.next is None else f"Node({self.value}, Node({self.next}))"
 
     def __str__(self) -> str:
         return str(self.value)
@@ -68,6 +68,11 @@ if __name__ == "__main__":
     Node1 = DoubleLinkedNode(1)
     Node2 = DoubleLinkedNode(2)
     Node3 = DoubleLinkedNode(3)
+
+    Node4 = Node(2)
+
+    print(repr(Node2))
+    print(repr(Node4))
 
     Node1.next = Node2
     Node2.next = Node3

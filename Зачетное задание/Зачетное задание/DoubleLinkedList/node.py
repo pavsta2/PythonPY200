@@ -14,7 +14,7 @@ class Node:
         self._next = next_
 
     def __repr__(self) -> str:
-        return f"Node({self.value}, {None})" if self._next is None else f"Node({self.value}, Node({self._next}))"
+        return f"Node({self.value}, {None})" if self.next is None else f"Node({self.value}, Node({self.next}))"
 
     def __str__(self) -> str:
         return str(self.value)
