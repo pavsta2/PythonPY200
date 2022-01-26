@@ -99,7 +99,6 @@ class LinkedList(MutableSequence, ABC):
         return f"{self.__class__.__name__}{self.to_list()}"
 
 
-
 class DoubleLinkedList(LinkedList):
     NODE_CLASS = DoubleLinkedNode
 
@@ -142,7 +141,7 @@ class DoubleLinkedList(LinkedList):
             self.head = inserted_node
             self.len += 1
         else:
-            self.link_nodes(self.step_by_step_on_nodes(index-1), inserted_node)
+            self.link_nodes(self.step_by_step_on_nodes(index - 1), inserted_node)
             self.link_nodes(inserted_node, self.step_by_step_on_nodes(index))
             self.len += 1
 
