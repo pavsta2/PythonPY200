@@ -33,6 +33,12 @@ class LinkedList(MutableSequence, ABC):
     def __len__(self):
         return self.len
 
+    def step_by_step_on_nodes(self, index):
+        current_node = self.head
+        for i in range(index):
+            current_node = current_node.next
+        return current_node
+
     def __getitem__(self, index: int) -> Any:
         """"""
         if not isinstance(index, int):
@@ -41,13 +47,25 @@ class LinkedList(MutableSequence, ABC):
         if not 0 <= index < self.len:
             raise IndexError()
 
-        current_node = self.head
-        for i in range(index):
-            current_node = current_node.next
-        return current_node.value
+        return self.step_by_step_on_nodes(index).value
 
-    def __delitem__(self, key):
-        ...
+    def __delitem__(self, index):
+        if not isinstance(index, int):
+            raise TypeError()
+        if not 0 <= index < self.len:
+            raise IndexError()
+
+        if index == 0:
+            self.head = self.head.next
+        elif 0 < index < (self.len - 1):
+            node_new_left = self.step_by_step_on_nodes(index - 1)
+            node_new_right = self.step_by_step_on_nodes(index + 1)
+            node_new_left.next = node_new_right
+        else:
+            node_new_last = self.step_by_step_on_nodes(index - 1)
+            node_new_last.next = None
+
+        self.len -= 1
 
     def __setitem__(self, key, value):
         ...
@@ -63,4 +81,6 @@ if __name__ == "__main__":
     a = [1, 2, 3, 4, 5, 6, 7]
     b = LinkedList(a)
 
-    print(b[0])
+    del b[1]
+
+    print(b)
