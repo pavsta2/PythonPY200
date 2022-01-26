@@ -67,8 +67,9 @@ class LinkedList(MutableSequence, ABC):
 
         self.len -= 1
 
-    def __setitem__(self, key, value):
-        ...
+    def __setitem__(self, index, value):
+        set_node = self.step_by_step_on_nodes(index)
+        set_node.value = value
 
     def insert(self, index: int, value) -> None:
         ...
@@ -81,6 +82,5 @@ if __name__ == "__main__":
     a = [1, 2, 3, 4, 5, 6, 7]
     b = LinkedList(a)
 
-    del b[1]
-
+    b[1] = 100
     print(b)
