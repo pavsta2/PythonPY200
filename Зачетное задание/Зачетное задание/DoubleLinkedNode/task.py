@@ -19,8 +19,9 @@ class Node:
     def __str__(self) -> str:
         return str(self.value)
 
-    def is_valid(self, node: Any) -> None:
-        if not isinstance(node, (type(None), Node)):
+    @classmethod
+    def is_valid(cls, node: Any) -> None:
+        if not isinstance(node, (type(None), cls)):
             raise TypeError("Присоединяемый узел д.б. объектом класса Node")
 
     @property
@@ -36,7 +37,7 @@ class Node:
 
 
 class DoubleLinkedNode(Node):
-    def __init__(self, value, next_=None, prev=None):
+    def __init__(self, value, next_= None, prev = None):
         """
         Наследуем от базового класса все атрибуты и добавляем новый - prev
         """
@@ -47,10 +48,6 @@ class DoubleLinkedNode(Node):
         next_ = str(None) if self.next is None else f"{self.__class__.__name__}({self.next.value})"
         prev = str(None) if self.prev is None else f"{self.__class__.__name__}({self.prev.value})"
         return f"{self.__class__.__name__}({self.value}, {next_}, {prev})"
-
-    def is_valid(self, dnode: Any) -> None:
-        if not isinstance(dnode, (type(None), DoubleLinkedNode)):
-            raise TypeError("Присоединяемый узел д.б. объектом класса DoubleLinkedNode")
 
     @property
     def prev(self):

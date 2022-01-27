@@ -5,7 +5,7 @@ from _collections_abc import MutableSequence
 from node import Node, DoubleLinkedNode
 
 
-class LinkedList(MutableSequence, ABC):
+class LinkedList(MutableSequence, ABC):  # fixme remove ABC
     NODE_CLASS = Node
 
     def __init__(self, data: Iterable = None):
@@ -76,7 +76,7 @@ class LinkedList(MutableSequence, ABC):
         self.is_valid_index(index)
 
         current_node = self.head
-        for i in range(index):
+        for _ in range(index):
             current_node = current_node.next
         return current_node
 
@@ -84,7 +84,7 @@ class LinkedList(MutableSequence, ABC):
         """"""
         return self.step_by_step_on_nodes(index).value
 
-    def __delitem__(self, index: int):
+    def __delitem__(self, index: int):  # todo test case
         self.is_valid_index(index)
 
         if index == 0:
@@ -134,7 +134,7 @@ class LinkedList(MutableSequence, ABC):
 
     def __contains__(self, item: Any) -> bool:
         result = False
-        for _ in range(self.len):
+        for _ in range(self.len):  # fixme for value in self: # todo
             if item == self.step_by_step_on_nodes(_).value:
                 result = True
         return result
@@ -157,7 +157,7 @@ class LinkedList(MutableSequence, ABC):
 
     def __repr__(self) -> str:
         # return f"{[self.NODE_CLASS.__repr__(node) for node in self]}"
-        return f"{self.__class__.__name__}{self.to_list()}"
+        return f"{self.__class__.__name__}{self.to_list()}"  # todo for node in self.iterator_node
 
 
 class DoubleLinkedList(LinkedList):
@@ -213,3 +213,6 @@ if __name__ == "__main__":
     b = DoubleLinkedList(a)
 
     print(b.count(5))
+
+    # todo coverage test insert, найти момент когда не работает setter head
+    # вместе setter head сделать protected _head, rename in Dll, getter оставить
