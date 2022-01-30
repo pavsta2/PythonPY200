@@ -1,11 +1,10 @@
-from abc import ABC
 from typing import Any, Iterable, Optional, Iterator
-from _collections_abc import MutableSequence
+from collections.abc import MutableSequence
 
 from node import Node, DoubleLinkedNode
 
 
-class LinkedList(MutableSequence, ABC):  # fixme remove ABC
+class LinkedList(MutableSequence):
     NODE_CLASS = Node
 
     def __init__(self, data: Iterable = None):
@@ -134,9 +133,12 @@ class LinkedList(MutableSequence, ABC):  # fixme remove ABC
 
     def __contains__(self, item: Any) -> bool:
         result = False
-        for _ in range(self.len):  # fixme for value in self: # todo
-            if item == self.step_by_step_on_nodes(_).value:
+        for node in self:
+            if item == node:
                 result = True
+        # for _ in range(self.len):  # fixme for value in self: # todo
+        #     if item == self.step_by_step_on_nodes(_).value:
+        #         result = True
         return result
 
     def __reversed__(self) -> list:
@@ -147,9 +149,12 @@ class LinkedList(MutableSequence, ABC):  # fixme remove ABC
 
     def count(self, value: Any) -> int:
         count = 0
-        for _ in range(self.len):
-            if value == self.step_by_step_on_nodes(_).value:
+        for node in self:
+            if value == node:
                 count += 1
+        # for _ in range(self.len):
+        #     if value == self.step_by_step_on_nodes(_).value:
+        #         count += 1
         return count
 
     def __str__(self):
@@ -192,27 +197,68 @@ class DoubleLinkedList(LinkedList):
         self.len -= 1
 
     def insert(self, index: int, value: Any) -> None:
-        self.is_valid_index(index)
 
         inserted_node = self.NODE_CLASS(value)
 
-        if index > (self.len - 1) or self.head is None:
+        if self.head is None:
             self.append(value)
         elif index == 0:
             self.link_nodes(inserted_node, self.head)
             self.head = inserted_node
             self.len += 1
         else:
-            self.link_nodes(self.step_by_step_on_nodes(index - 1), inserted_node)
+            self.is_valid_index(index)
             self.link_nodes(inserted_node, self.step_by_step_on_nodes(index))
+            self.link_nodes(self.step_by_step_on_nodes(index - 1), inserted_node)
             self.len += 1
+
+    def pop(self):
+        last = self.step_by_step_on_nodes(self.len - 1).value
+        self.__delitem__(self.len - 1)
+        return last
+
+    def extend(self, values: Iterable) -> None:
+        if not isinstance(values, (list, dict, set, tuple)):  # как включить сюда итератор?
+            raise TypeError(f"метод ожидает в кач аргумента итерируемую посл-ть, по факту:{type(values)}")
+        for value in values:
+            self.append(value)
+
+    def remove(self, value: any) -> None:
+        count = 0
+        find = False
+        for val in self:
+            if val == value:
+                self.__delitem__(count)
+                find = True
+            count += 1
+        if not find:
+            raise ValueError("элемент с таким значением не найден")
+
+    def index(self, value: Any, start: int = 0, stop: int = 2147483647) -> int:
+        if stop > (self.len - 1):
+            stop = self.len
+        find = False
+        find_index = None
+        for index in range(start, stop):
+            val = self.step_by_step_on_nodes(index).value
+            if val == value:
+                find_index = index
+                find = True
+                break
+        if not find:
+            raise ValueError("элемент с таким значением не найден")
+        return find_index
+
+
 
 
 if __name__ == "__main__":
-    a = [1, "4", 2, 3, 4, 5, 5, 5, 6, 7, "4", [9, 9, 9]]
+    a = [5, 5, 1,1, 2, 3,5, 5]
     b = DoubleLinkedList(a)
 
-    print(b.count(5))
+    print(b.index(5))
+
+    # print(b)
 
     # todo coverage test insert, найти момент когда не работает setter head
     # вместе setter head сделать protected _head, rename in Dll, getter оставить
