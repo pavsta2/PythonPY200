@@ -250,10 +250,8 @@ class DoubleLinkedList(LinkedList):
         return find_index
 
 
-
-
 if __name__ == "__main__":
-    a = [5, 5, 1,1, 2, 3,5, 5]
+    a = [5, 5, 1, 1, 2, 3, 5, 5]
     b = DoubleLinkedList(a)
 
     print(b.index(5))
