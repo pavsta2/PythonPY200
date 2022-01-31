@@ -254,7 +254,7 @@ if __name__ == "__main__":
     # a = []
     b = DoubleLinkedList([])
 
-    print(b.insert(800,1))
+    print(b.insert(800, 1))
 
     print(b)
 

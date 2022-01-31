@@ -37,7 +37,7 @@ class Node:
 
 
 class DoubleLinkedNode(Node):
-    def __init__(self, value, next_= None, prev = None):
+    def __init__(self, value, next_=None, prev=None):
         """
         Наследуем от базового класса все атрибуты и добавляем новый - prev
         """
