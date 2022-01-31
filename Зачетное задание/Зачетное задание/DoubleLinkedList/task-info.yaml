@@ -39,5 +39,8 @@ files:
 - name: test_task.py
   visible: true
   learner_created: true
+- name: DLNode.py
+  visible: true
+  learner_created: true
 status: Unchecked
 record: -1

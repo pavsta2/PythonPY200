@@ -100,16 +100,16 @@ files:
   visible: true
   placeholders:
   - offset: 56
-    length: 48
+    length: 49
     placeholder_text: '...):  # TODO наследоваться от unittest.TestCase'
     initial_state:
       length: 48
       offset: 56
     initialized_from_dependency: false
-    selected: false
+    selected: true
     status: Unchecked
     encrypted_possible_answer: 'unittest.TestCase):'
-  - offset: 247
+  - offset: 248
     length: 57
     placeholder_text: '...  # TODO с помощью метода assertIsNone проверить следующий
       узел'

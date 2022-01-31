@@ -3,14 +3,14 @@ import unittest
 from task import Node
 
 
-class TestCase(unitest.TestCase):  # наследоваться от unittest.TestCase
+class TestCase(unittest.TestCase):  # наследоваться от unittest.TestCase
     def test_init_node_without_next(self):
         """Проверить следующий узел после инициализации с аргументом next_ по умолчанию"""
         node = Node(5)
 
         self.assertIsNone(node.next)
         #  self.assertIs(None, node.next) - можно так
-        self.assertEqual(10, node.value)
+        self.assertEqual(5, node.value)
 
     def test_init_node_with_next(self):
         """Проверить следующий узел после инициализации с переданным аргументом next_"""

@@ -251,12 +251,12 @@ class DoubleLinkedList(LinkedList):
 
 
 if __name__ == "__main__":
-    a = [5, 5, 1, 1, 2, 3, 5, 5]
-    b = DoubleLinkedList(a)
+    # a = []
+    b = DoubleLinkedList([])
 
-    print(b.index(5))
+    print(b.insert(800,1))
 
-    # print(b)
+    print(b)
 
     # todo coverage test insert, найти момент когда не работает setter head
     # вместе setter head сделать protected _head, rename in Dll, getter оставить
