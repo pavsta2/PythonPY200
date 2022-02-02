@@ -35,12 +35,6 @@ class LinkedList(MutableSequence):
             raise TypeError(f"Узел д.б. типа {self.__class__.__name__}")
         self.__tail = value
 
-    @head.setter
-    def head(self, value: NODE_CLASS):
-        if not isinstance(value, self.NODE_CLASS):
-            raise TypeError(f"Узел д.б. типа {self.__class__.__name__}")
-        self.__head = value
-
     @len.setter
     def len(self, value: int):
         if not isinstance(value, int):
@@ -51,7 +45,7 @@ class LinkedList(MutableSequence):
         append_node = self.NODE_CLASS(value)
 
         if self.head is None:
-            self.head = self.tail = append_node
+            self.__head = self.tail = append_node
         else:
             self.link_nodes(self.tail, append_node)
             self.tail = append_node
@@ -59,13 +53,23 @@ class LinkedList(MutableSequence):
 
     @staticmethod
     def link_nodes(left_node: Node, right_node: Optional[Node] = None) -> None:
-        """"""
+        """
+
+        :param left_node:
+        :param right_node:
+        :return:
+        """
         left_node.next = right_node
 
     def __len__(self):
         return self.__len
 
     def is_valid_index(self, index):
+        """
+
+        :param index:
+        :return:
+        """
         if not isinstance(index, int):
             raise TypeError()
         if not 0 <= index < self.__len:
@@ -83,11 +87,11 @@ class LinkedList(MutableSequence):
         """"""
         return self.step_by_step_on_nodes(index).value
 
-    def __delitem__(self, index: int):  # todo test case
+    def __delitem__(self, index: int):
         self.is_valid_index(index)
 
         if index == 0:
-            self.head = self.head.next
+            self.__head = self.head.next
         elif 0 < index < (self.__len - 1):
             node_new_left = self.step_by_step_on_nodes(index - 1)
             node_new_right = self.step_by_step_on_nodes(index + 1)
@@ -103,18 +107,20 @@ class LinkedList(MutableSequence):
         set_node.value = value
 
     def insert(self, index: int, value: Any) -> None:
-        self.is_valid_index(index)
 
         inserted_node = self.NODE_CLASS(value)
-        if index > (self.__len - 1) or self.head is None:
+        if self.__head is None:
             self.append(value)
         elif index == 0:
             self.link_nodes(inserted_node, self.step_by_step_on_nodes(0))
-            self.head = inserted_node
+            self.__head = inserted_node
             self.__len += 1
         else:
-            inserted_node.next = self.step_by_step_on_nodes(index)
-            self.step_by_step_on_nodes(index - 1).next = inserted_node
+            # inserted_node.next = self.step_by_step_on_nodes(index)
+            # self.step_by_step_on_nodes(index - 1).next = inserted_node
+            self.is_valid_index(index)
+            self.link_nodes(inserted_node, self.step_by_step_on_nodes(index))
+            self.link_nodes(self.step_by_step_on_nodes(index - 1), inserted_node)
             self.__len += 1
 
     def to_list(self) -> list:
@@ -136,9 +142,7 @@ class LinkedList(MutableSequence):
         for node in self:
             if item == node:
                 result = True
-        # for _ in range(self.len):  # fixme for value in self: # todo
-        #     if item == self.step_by_step_on_nodes(_).value:
-        #         result = True
+                break
         return result
 
     def __reversed__(self) -> list:
@@ -162,7 +166,18 @@ class LinkedList(MutableSequence):
 
     def __repr__(self) -> str:
         # return f"{[self.NODE_CLASS.__repr__(node) for node in self]}"
-        return f"{self.__class__.__name__}{self.to_list()}"  # todo for node in self.iterator_node
+        return f"{self.__class__.__name__}{self.to_list()}"  # for node in self.iterator_node
+
+    def remove(self, value: any) -> None:
+        count = 0
+        find = False
+        for val in self:
+            if val == value:
+                self.__delitem__(count)
+                find = True
+            count += 1
+        if not find:
+            raise ValueError("элемент с таким значением не найден")
 
 
 class DoubleLinkedList(LinkedList):
@@ -183,7 +198,7 @@ class DoubleLinkedList(LinkedList):
         self.is_valid_index(index)
 
         if index == 0:
-            self.head = self.head.next
+            self.__head = self.head.next
             self.head.prev = None
 
         elif 0 < index < (self.len - 1):
@@ -196,50 +211,60 @@ class DoubleLinkedList(LinkedList):
 
         self.len -= 1
 
-    def insert(self, index: int, value: Any) -> None:
+    # def insert(self, index: int, value: Any) -> None:
+    #
+    #     inserted_node = self.NODE_CLASS(value)
+    #
+    #     if self.head is None:
+    #         self.append(value)
+    #     elif index == 0:
+    #         self.link_nodes(inserted_node, self.head)
+    #         self.__head = inserted_node
+    #         self.len += 1
+    #     else:
+    #         self.is_valid_index(index)
+    #         self.link_nodes(inserted_node, self.step_by_step_on_nodes(index))
+    #         self.link_nodes(self.step_by_step_on_nodes(index - 1), inserted_node)
+    #         self.len += 1
 
-        inserted_node = self.NODE_CLASS(value)
+    def pop(self, index=None):
+        if index is None:
+            index = len(self) - 1
 
-        if self.head is None:
-            self.append(value)
-        elif index == 0:
-            self.link_nodes(inserted_node, self.head)
-            self.head = inserted_node
-            self.len += 1
-        else:
-            self.is_valid_index(index)
-            self.link_nodes(inserted_node, self.step_by_step_on_nodes(index))
-            self.link_nodes(self.step_by_step_on_nodes(index - 1), inserted_node)
-            self.len += 1
-
-    def pop(self):
-        last = self.step_by_step_on_nodes(self.len - 1).value
-        self.__delitem__(self.len - 1)
+        last = self.step_by_step_on_nodes(index).value
+        self.__delitem__(index)
         return last
 
     def extend(self, values: Iterable) -> None:
+        # try:
+        #     [_ for _ in values]
+        # except TypeError:
+        #     print(f"метод ожидает в кач аргумента итерируемую посл-ть, по факту:{type(values)}")
+        # else:
+
         if not isinstance(values, (list, dict, set, tuple)):  # как включить сюда итератор?
             raise TypeError(f"метод ожидает в кач аргумента итерируемую посл-ть, по факту:{type(values)}")
         for value in values:
             self.append(value)
 
-    def remove(self, value: any) -> None:
-        count = 0
-        find = False
-        for val in self:
-            if val == value:
-                self.__delitem__(count)
-                find = True
-            count += 1
-        if not find:
-            raise ValueError("элемент с таким значением не найден")
+    # def remove(self, value: any) -> None:
+    #     count = 0
+    #     find = False
+    #     for val in self:
+    #         if val == value:
+    #             self.__delitem__(count)
+    #             find = True
+    #         count += 1
+    #     if not find:
+    #         raise ValueError("элемент с таким значением не найден")
 
-    def index(self, value: Any, start: int = 0, stop: int = 2147483647) -> int:
-        if stop > (self.len - 1):
+    def index(self, value: Any, start: int = 0, stop=None) -> int:
+
+        if stop is not None and stop > (self.len - 1):
             stop = self.len
         find = False
         find_index = None
-        for index in range(start, stop):
+        for index in range(start, self.len):
             val = self.step_by_step_on_nodes(index).value
             if val == value:
                 find_index = index
@@ -252,11 +277,10 @@ class DoubleLinkedList(LinkedList):
 
 if __name__ == "__main__":
     # a = []
-    b = DoubleLinkedList([])
+    b = DoubleLinkedList([1, 2, 3, 4, 5])
 
-    print(b.insert(800, 1))
+    print(b.index(9))
 
     print(b)
 
-    # todo coverage test insert, найти момент когда не работает setter head
-    # вместе setter head сделать protected _head, rename in Dll, getter оставить
+
